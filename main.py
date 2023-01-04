@@ -19,14 +19,13 @@ class VideoModel(db.Model):
         return f"Video(name={self.name},views={self.views},likes={self.likes})"
 
 #db.create_all()
-video_put_args=reqparse.RequestParser()
 
+video_put_args=reqparse.RequestParser()
 video_put_args.add_argument("name",type=str,help="Name of the Video is Required",required=True)
 video_put_args.add_argument("likes",type=int,help="likes of the Video is Required",required=True)
 video_put_args.add_argument("views",type=int,help="Views of the Video is Required ",required=True)
 
 video_update_args=reqparse.RequestParser()
-
 video_update_args.add_argument("name",type=str,help="Name of the Video is Required")
 video_update_args.add_argument("likes",type=int,help="likes of the Video is Required")
 video_update_args.add_argument("views",type=int,help="Views of the Video is Required")
