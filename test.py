@@ -12,10 +12,8 @@ for i in range(len(data)):
     response=requests.post(BASE+"video/" +str(i),data[i])
     print(response.json()) 
 
-input()    
-reponse =requests.get(BASE+"video/4")
-print(reponse.json())
 
 input()
-reponse=requests.patch(BASE+"video/1",{"likes":5000})
-print(reponse.json())
+response=requests.get(BASE+"video/all")
+for i in range(response.json()):
+    print(f"Record: {i}")

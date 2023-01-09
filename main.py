@@ -30,6 +30,7 @@ video_update_args.add_argument("name",type=str,help="Name of the Video is Requir
 video_update_args.add_argument("likes",type=int,help="likes of the Video is Required")
 video_update_args.add_argument("views",type=int,help="Views of the Video is Required")
 
+
 resource_fields={
     'id':fields.Integer,
     'name':fields.String,
@@ -71,9 +72,24 @@ class Video(Resource):
         
         db.session.commit()
         return result
+    
+    def delete(self,video_id):
+        result=VideoModel.query.filter_by(id=video_id).first()
+        if not result:
+             abort(404,message="Id Does Not Exists")
+        db.session.delete(result)
+        db.session.commit
+        return 204
+
+class VideoGetAll(Resource):
+      @marshal_with(resource_fields)
+      def get(self,comment):
+          result=VideoModel.query.all()
+          return result
          
     
 api.add_resource(Video,"/video/<int:video_id>")
-  
+api.add_resource(VideoGetAll,"/video/<string:comment>")
+
 if __name__ == "__main__":
     app.run(debug=True)
